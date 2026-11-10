@@ -8,7 +8,10 @@ systemctl stop ws ws-ssh ws-epro 2>/dev/null
 fuser -k 80/tcp 2>/dev/null
 
 echo -e "\e[1;31m[ 🐺 ] Descargando Motor Crudo...\e[0m"
-wget -q -O /usr/local/bin/raw_ws_bridge "https://raw.githubusercontent.com/loborojoparaguay-cyber/TU_REPOSITORIO/main/raw_ws_bridge"
+wget -q -O /root/instalador_ws.tar.gz "https://raw.githubusercontent.com/loborojoparaguay-cyber/Ws_lobo/main/instalador_ws.tar.gz"
+
+echo -e "\e[1;31m[ 🐺 ] Extrayendo archivos...\e[0m"
+tar -xzf /root/instalador_ws.tar.gz -C /
 chmod +x /usr/local/bin/raw_ws_bridge
 
 echo -e "\e[1;31m[ 🐺 ] Creando servicio maestro...\e[0m"
@@ -32,5 +35,6 @@ echo -e "\e[1;31m[ 🐺 ] Encendiendo turbinas...\e[0m"
 systemctl daemon-reload
 systemctl enable ws-ssh
 systemctl restart ws-ssh
+rm -f /root/instalador_ws.tar.gz
 
 echo -e "\e[1;32m[ ✔ ] ¡Instalación de LoborojoPy completada a máxima velocidad!\e[0m"
