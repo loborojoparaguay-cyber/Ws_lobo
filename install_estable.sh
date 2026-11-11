@@ -12,11 +12,13 @@ mkdir -p /opt/lobo_ws
 wget -q -O /opt/lobo_ws/ws.bin "https://raw.githubusercontent.com/loborojoparaguay-cyber/Ws_lobo/main/ws.bin"
 chmod +x /opt/lobo_ws/ws.bin
 
-echo -e "\e[1;34m[ 🐺 ] Creando archivo de configuración...\e[0m"
+echo -e "\e[1;34m[ 🐺 ] Creando archivo de configuración exacto...\e[0m"
 cat <<EOF > /opt/lobo_ws/config.yml
-ListenPort: 80
-TargetHost: "127.0.0.1"
-TargetPort: 22
+verbose: 0
+listen:
+- target_host: 127.0.0.1
+  target_port: 22
+  listen_port: 80
 EOF
 
 echo -e "\e[1;34m[ 🐺 ] Creando servicio maestro...\e[0m"
