@@ -9,9 +9,15 @@ fuser -k 80/tcp 2>/dev/null
 
 echo -e "\e[1;34m[ 🐺 ] Descargando ws.bin desde GitHub...\e[0m"
 mkdir -p /opt/lobo_ws
-# Descarga directa del binario
 wget -q -O /opt/lobo_ws/ws.bin "https://raw.githubusercontent.com/loborojoparaguay-cyber/Ws_lobo/main/ws.bin"
 chmod +x /opt/lobo_ws/ws.bin
+
+echo -e "\e[1;34m[ 🐺 ] Creando archivo de configuración...\e[0m"
+cat <<EOF > /opt/lobo_ws/config.yml
+ListenPort: 80
+TargetHost: "127.0.0.1"
+TargetPort: 22
+EOF
 
 echo -e "\e[1;34m[ 🐺 ] Creando servicio maestro...\e[0m"
 cat <<EOF > /etc/systemd/system/ws.service
@@ -23,8 +29,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/lobo_ws
-# Ejecución estándar en el puerto 80
-ExecStart=/opt/lobo_ws/ws.bin 80
+ExecStart=/opt/lobo_ws/ws.bin -config /opt/lobo_ws/config.yml
 Restart=on-failure
 RestartSec=3
 
