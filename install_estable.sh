@@ -12,9 +12,15 @@ mkdir -p /opt/lobo_ws
 wget -q -O /opt/lobo_ws/ws.bin "https://raw.githubusercontent.com/loborojoparaguay-cyber/Ws_lobo/main/ws.bin"
 chmod +x /opt/lobo_ws/ws.bin
 
+echo -e "\e[1;34m[ 🐺 ] Preparando base de datos de consumo...\e[0m"
+# Creamos el archivo de tráfico vacío para que el panel lo encuentre
+echo "{}" > /etc/traffic.json
+chmod 666 /etc/traffic.json
+
 echo -e "\e[1;34m[ 🐺 ] Creando archivo de configuración exacto...\e[0m"
 cat <<EOF > /opt/lobo_ws/config.yml
 verbose: 0
+traffic_path: "/etc/traffic.json"
 listen:
 - target_host: 127.0.0.1
   target_port: 22
