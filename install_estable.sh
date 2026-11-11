@@ -31,7 +31,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/lobo_ws
-ExecStart=/opt/lobo_ws/ws.bin -config /opt/lobo_ws/config.yml
+ExecStart=/opt/lobo_ws/ws.bin -f /opt/lobo_ws/config.yml
 Restart=on-failure
 RestartSec=3
 
